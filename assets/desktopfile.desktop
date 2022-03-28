@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Exec=/usr/bin/screen-text-scroller
+Name=Screen Text Scroller
+Icon=/usr/share/icons/hicolor/64x64/apps/screen-text-scroller.png
+
+

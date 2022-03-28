@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>{appname} - change pwd</title>
+    
+	<link rel="stylesheet" type="text/css" href="css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    
+	<script src="browsercheck.js"></script>
+	<script src="chadmpwd.js"></script>
+</head>
+
+<body>
+
+<section class="section">
+<div class="container">
+
+<h1 class="title">{appname}</h1>
+<h2 class="subtitle">Change admin password</h2>
+
+<div class="field">
+	<label class="label">Old password</label>
+	<div class="control">
+		<input class="input" type="password" id="frmOldPassword">
+	</div>
+</div>
+
+<div class="field">
+	<label class="label">New password</label>
+	<div class="control">
+		<input class="input" type="password" id="frmNewPassowrd1"  autocomplete="new-password">
+	</div>
+</div>
+
+<div class="field">
+	<label class="label">Retype new password</label>
+	<div class="control">
+		<input class="input" type="password" id="frmNewPassowrd2" autocomplete="new-password">
+	</div>
+</div>
+
+<div class="field">
+	<div class="control">
+		<div class="buttons">
+			<button class="button is-primary" id="btnChange">Change</button>
+			<a class="button" href="/">Back</a>
+		</div>
+	</div>
+</div>
+
+
+	<div class="notification is-danger is-hidden" id="notification1">
+		<button class="delete"></button>
+		<span class="notiftext">hello</span>
+	</div>
+
+
+
+</div>
+</section>
+</body>
+</html>
+

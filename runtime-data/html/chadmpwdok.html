@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>{appname} - change pwd</title>
+    
+	<link rel="stylesheet" type="text/css" href="css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    
+	<script src="browsercheck.js"></script>
+</head>
+
+<body>
+
+<section class="section">
+<div class="container">
+
+<h1 class="title">{appname}</h1>
+
+<div class="box">
+Password changed.
+</div>
+
+<a href="/auth.html" class="mt-4 button">Continue to logon page</a>
+
+<script>
+	fetch('/logoff.do');
+</script>
+
+
+
+</div>
+</section>
+</body>
+</html>
+

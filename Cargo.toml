@@ -1,0 +1,45 @@
+[package]
+name = "screen-text-scroller"
+version = "0.2.0"
+edition = "2021"
+authors = ["Giovanni Panozzo <giovanni@panozzo.it>"]
+license = "Apache-2.0"
+description = "Simple scrolling text app"
+readme = "README.md"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+speedy2d = "1.6.0"
+hyper = { version = "0.14", features = ["full"] }
+tokio = { version = "1.17", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0" }
+futures = { version = "0.3", features = ["compat"] }
+cookie = { version = "0.13" }
+chrono = "0.4"
+csscolorparser = "0.5.0"
+directories-next = "2.0.0"
+image = "0.24.1"
+pwhash = "1"
+
+[package.metadata.deb]
+maintainer = "Giovanni Panozzo <giovanni@panozzo.it>"
+copyright = "2022, Giovanni Panozzo <giovanni@panozzo.it>"
+license-file = "assets/debian/copyright"
+extended-description = """\
+A desktop application to display simple scrolling text \
+in a remote environment.
+"""
+depends = "$auto"
+section = "video"
+priority = "optional"
+changelog = "assets/debian/changelog"
+assets = [
+    ["target/release/screen-text-scroller", "usr/bin/", "755"],
+    ["README.md", "usr/share/doc/screen-text-scroller/README", "644"],
+    ["runtime-data/*/*/*", "usr/share/screen-text-scroller", "644"],
+    ["runtime-data/*/*", "usr/share/screen-text-scroller", "644"],
+    ["runtime-data/icons/main_icon.png", "usr/share/icons/hicolor/64x64/apps/screen-text-scroller.png", "644"],
+    ["assets/desktopfile.desktop", "/usr/share/applications/screen-text-scroller.desktop", "644"]
+]
