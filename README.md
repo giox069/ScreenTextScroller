@@ -5,7 +5,9 @@ ScreenTextScroller
 
 It should be able to run without problems on Linux (Xorg or Wayland), macOS, Windows. Not all video cards are supported.
 
-Currently, only a .deb package is available for download for debian/ubuntu. But the application can run also under Windows and macOS. If you want to run this application under windows or macOS, you must compile it with the rust compiler: install rust, clone this git repository, and then compile and run the application with `cargo run --release` command.
+Currently, only a installable package for debian/ubuntu is available [here](https://github.com/giox069/ScreenTextScroller/releases/latest) for download.
+
+If you want to run this application under windows or macOS, you must compile it with the rust compiler: install rust, clone this git repository, and then compile and run the application with `cargo run --release` command.
 
 Contributors are welcome: for example a windows installer will be very useful (cargo wix is an interesting tool to create a windows installer).
 
