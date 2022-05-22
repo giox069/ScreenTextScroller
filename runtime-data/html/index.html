@@ -104,16 +104,50 @@
 	<div class="field-body">
 		<div class="field is-narrow" style="width: 6rem;">
 			<div class="control">
-				<input class="input" type="color" id="backgroundcolor" placeholder="Background color">
+				<input class="input" type="color" id="backgroundcolor" name="backgroundcolor" placeholder="Background color">
 			</div>
 		</div>
 		<div class="field is-narrow">
 			<div class="control" style="width: 6rem;">
-				<input class="input" type="color" id="textcolor" placeholder="Text color">
+				<input class="input" type="color" id="textcolor" name="textcolor" placeholder="Text color">
 			</div>
 		</div>
 	</div>
 </div>
+
+<div class="field is-horizontal">
+	<div class="field-label is-normal">
+		<label class="label">Background image</label>
+	</div>
+	<div class="field-body">
+		<div class="field is-narrow">
+			<div class="control">
+				<input class="input" type="text" id="currentbackgroundimage" name="currentbackgroundimage" placeholder="xxx">
+			</div>
+		</div>
+		<div class="field is-narrow">
+			<div class="control">
+				<div class="file has-name" id="bgfile">
+					<label class="file-label">
+						<input class="file-input" type="file" accept="image/jpg, image/gif" name="bgimage">
+						<span class="file-cta">
+							<span class="file-icon">
+								<i class="fas fa-upload"></i>
+							</span>
+							<span class="file-label">
+								Choose a file…
+							</span>
+						</span>
+						<span class="file-name">No file selected to upload.</span>
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
 
 <div class="field is-horizontal">
 	<div class="field-label is-normal">
@@ -122,12 +156,12 @@
 	<div class="field-body">
 		<div class="field is-narrow">
 			<div class="control">
-				<input class="input" type="text" id="hmargin" placeholder="Horizontal margin">
+				<input class="input" type="text" id="hmargin" name="hmargin" placeholder="Horizontal margin">
 			</div>
 		</div>
 		<div class="field is-narrow">
 			<div class="control">
-				<input class="input" type="text" id="vmargin" placeholder="Vertical margin">
+				<input class="input" type="text" id="vmargin" name="vmargin" placeholder="Vertical margin">
 			</div>
 		</div>
 	</div>

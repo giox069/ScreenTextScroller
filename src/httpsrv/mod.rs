@@ -305,6 +305,22 @@ async fn serve_logoff(d: Arc<Mutex<LpfHttpServerData>>, req: Request<Body>, resp
 
 }
 
+async fn serve_upload(d: Arc<Mutex<LpfHttpServerData>>, req: Request<Body>, response: &mut Response<Body>, _client_addr: SocketAddr) {
+	response.headers_mut().insert("Content-type", HeaderValue::from_static("application/json"));
+
+	let _sid = match is_authenticated(d.clone(), &req).await {
+		Some(s) => s,
+		None => {
+			let r = json!({ "auth": "not authenticated or session expired" }).to_string();
+			*response.body_mut() = Body::from(r);
+			return
+		}
+	};
+
+	let errj = json!({"err": "Upload error"});
+	*response.body_mut() = Body::from(errj.to_string());
+}
+
 async fn serve_lapi(d: Arc<Mutex<LpfHttpServerData>>, req: Request<Body>, response: &mut Response<Body>, _client_addr: SocketAddr) {
 	response.headers_mut().insert("Content-type", HeaderValue::from_static("application/json"));
 
@@ -399,6 +415,8 @@ async fn serve_page(d: Arc<Mutex<LpfHttpServerData>>, req: Request<Body>, respon
 						serve_authservice(d, req, response, client_addr).await;
 				} else if req.uri() == "/lapi" && req.method() == &Method::POST {
 						serve_lapi(d, req, response, client_addr).await;
+				} else if req.uri() == "/upload" && req.method() == &Method::POST {
+						serve_upload(d, req, response, client_addr).await;
 				} else if req.uri() == "/logoff.do" && req.method() == &Method::GET {
 						serve_logoff(d, req, response, client_addr).await;
 				} else {
@@ -418,16 +436,17 @@ async fn serve_page(d: Arc<Mutex<LpfHttpServerData>>, req: Request<Body>, respon
 						}
 						drop(rgd);
 
-						let mut content = match fs::read(&filename).await {
-								Ok(s) => s,
+						let (mut content, content_type) = match fs::read(&filename).await {
+								Ok(s) => (s, content_type(filename)),
 								Err(e) => {
-								*response.status_mut() = StatusCode::NOT_FOUND;
-								println!("Unalbe to read file {}: {}", filename.display(), e.to_string());
-								format!("Unalbe to read file {}: {}", filename.display(), e.to_string()).into_bytes()
+									// File not found or other similar error
+									*response.status_mut() = StatusCode::NOT_FOUND;
+									println!("Unalbe to read file {}: {}", filename.display(), e.to_string());
+									(format!("Unalbe to read file {}: {}", filename.display(), e.to_string()).into_bytes(), "text/plain")
 								}
 						};
-						/* Change some variables in the static file, like {appname} */
-						let content_type = content_type(filename);
+
+						/* Change some variables when showing html, like {appname} */
 						if content_type == "text/html" {
 							let mut cs = match str::from_utf8(&content) {
 								Ok(v) => v.to_string(),

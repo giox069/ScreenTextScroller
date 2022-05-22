@@ -2,16 +2,47 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	readConfig();
 
 	document.getElementById('btnApply').addEventListener('click', (e) => {
-		showNotification(null);
-		saveConfig()
-		.then(() => readConfig())
-		.catch(msg => showNotification(msg));
+		do_click_apply();
+	});
+
+	document.querySelector('#bgfile input[type=file]').addEventListener('change', (e) => {
+		const fileInput = document.querySelector('#bgfile input[type=file]');
+		const fileName = document.querySelector('#bgfile .file-name');
+		fileName.textContent = fileInput.files[0].name;
 	});
 
 	bulmaNavbarEnable();
 	bulmaNotifEnable();
 
 });
+
+async function do_click_apply()
+{
+		const fileInput = document.querySelector('#bgfile input[type=file]');
+		showNotification(null);
+
+		try {
+			if (fileInput.files.length > 0)
+				await uploadBackground();
+			await saveConfig();
+			readConfig();
+		} catch(msg) {
+			showNotification(msg);
+		}
+}
+
+async function uploadBackground()
+{
+	const fileInput = document.querySelector('#bgfile input[type=file]');
+	let formData = new FormData();
+	formData.append("file", fileInput.files[0]);
+	let rsp = await fetch('/upload', {
+		method: 'POST',
+		body: formData
+	});
+	console.log(rsp);
+	console.log('file uploaded');
+}
 
 function showNotification(msg) {
 	let n = document.getElementById('notification1');
