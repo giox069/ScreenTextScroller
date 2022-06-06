@@ -1,2 +1,4 @@
 /target
 runtime-data/data/ticker_config.json
+runtime-data/upload
+.vscode
